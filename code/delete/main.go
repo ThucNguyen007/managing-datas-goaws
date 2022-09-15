@@ -39,7 +39,7 @@ func get(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, err
 
 	svc := dynamodb.NewFromConfig(cfg)
 	out, err := svc.DeleteItem(context.TODO(), &dynamodb.DeleteItemInput{
-		TableName: aws.String("informations"),
+		TableName: aws.String("informations1"),
 		Key: map[string]types.AttributeValue{
 			"id": &types.AttributeValueMemberS{Value: information.Id},
 		},

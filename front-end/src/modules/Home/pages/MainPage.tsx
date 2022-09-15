@@ -1,8 +1,8 @@
 import { Avatar, Card, Col, Row } from "antd";
 import { useEffect, useState } from "react";
 
-import { Book } from "@core/interfaces";
-import bookApi from "@modules/Home/services/books";
+import { Data } from "@core/interfaces";
+import bookApi from "@modules/Home/services/informations";
 
 const { Meta } = Card;
 
@@ -10,7 +10,7 @@ interface Props {}
 
 const MainPage = (props: Props) => {
   /* State */
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<Data[]>([]);
 
   useEffect(() => {
     bookApi.list().then((res) => {

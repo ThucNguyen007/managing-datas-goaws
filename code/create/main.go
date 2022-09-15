@@ -43,7 +43,7 @@ func Upload(request events.APIGatewayProxyRequest, cfg aws.Config) (image string
 		return
 	}
 
-	bucket := "serverless-series-upload"
+	bucket := "serverless-goaws-upload"
 	filename := part.FileName()
 
 	data := &s3.PutObjectInput{
@@ -91,7 +91,7 @@ func create(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, 
 	form, _ := r.ReadForm(1024)
 	svc := dynamodb.NewFromConfig(cfg)
 	data, err := svc.PutItem(context.TODO(), &dynamodb.PutItemInput{
-		TableName: aws.String("informations"),
+		TableName: aws.String("informations1"),
 		Item: map[string]types.AttributeValue{
 			"id":     &types.AttributeValueMemberS{Value: form.Value["id"][0]},
 			"name":   &types.AttributeValueMemberS{Value: form.Value["name"][0]},

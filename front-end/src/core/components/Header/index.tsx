@@ -59,7 +59,7 @@ const Header = ({ authenticated }: Props) => {
             <Button onClick={() => goToPage("/")}>Logo</Button>
           </Col>
           <Col lg={12} className="menu">
-            <Button><Link to="/books/create">Create new book</Link></Button>
+            <Button><Link to="/informations1/create">Create new information</Link></Button>
             {authenticated ? (
               <>
                 <Button

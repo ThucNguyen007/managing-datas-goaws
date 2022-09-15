@@ -31,7 +31,7 @@ func get(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, err
 
 	svc := dynamodb.NewFromConfig(cfg)
 	out, err := svc.GetItem(context.TODO(), &dynamodb.GetItemInput{
-		TableName: aws.String("informations"),
+		TableName: aws.String("informations1"),
 		Key: map[string]types.AttributeValue{
 			"id": &types.AttributeValueMemberS{Value: req.PathParameters["id"]},
 		},

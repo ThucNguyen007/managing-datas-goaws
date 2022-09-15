@@ -17,7 +17,11 @@ type Data struct {
 	Id     string `json:"id"`
 	Name   string `json:"name"`
 	Author string `json:"author"`
-	Image  string `json:"image"`
+}
+
+type Res struct {
+	Rows  []Data `json:"rows"`
+	Total int    `json:"total"`
 }
 
 func list(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -31,7 +35,7 @@ func list(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, er
 
 	svc := dynamodb.NewFromConfig(cfg)
 	out, err := svc.Scan(context.TODO(), &dynamodb.ScanInput{
-		TableName: aws.String("informations"),
+		TableName: aws.String("informations1"),
 	})
 	if err != nil {
 		return events.APIGatewayProxyResponse{
@@ -49,14 +53,15 @@ func list(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, er
 		}, nil
 	}
 
-	res, _ := json.Marshal(informations)
+	total := len(informations)
+	res := Res{Rows: informations, Total: total}
+	r, _ := json.Marshal(res)
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Headers: map[string]string{
-			"Content-Type":                "application/json",
-			"Access-Control-Allow-Origin": "*",
+			"Content-Type": "application/json",
 		},
-		Body: string(res),
+		Body: string(r),
 	}, nil
 }
 
