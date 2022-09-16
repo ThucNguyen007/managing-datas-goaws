@@ -7,7 +7,7 @@ resource "aws_cloudfront_function" "cloudfront_redirect2" {
   runtime = "cloudfront-js-1.0"
 
   publish = true
-  code    = file("source/index.js")
+  code    = file("all-infos/source/index.js")
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {

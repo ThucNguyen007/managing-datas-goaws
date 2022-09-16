@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "serverless_spa_goaws" {
   bucket = "serverless-spa-goaws"
   acl    = "public-read"
-  policy = file("policies/s3_spa_policy.json")
+  policy = file("all-infos/policies/s3_spa_policy.json")
 
   website {
     index_document = "index.html"
@@ -11,12 +11,14 @@ resource "aws_s3_bucket" "serverless_spa_goaws" {
 
 resource "null_resource" "yarn_install" {
   depends_on = [
+
   ]
 
   provisioner "local-exec" {
-    command = <<-EOT
-      cd ${path.module}/mnt/c/Users/DangLuong.Nguyen001/Downloads/managing-datas-goaws/front-end && yarn install
-    EOT
+    interpreter = ["bash", "-c"]
+    command     = <<-EOT
+            cd "${path.module}/front-end" && "yarn install"
+            EOT
   }
 }
 
@@ -27,9 +29,10 @@ resource "null_resource" "replace" {
   ]
 
   provisioner "local-exec" {
-    command = <<-EOT
-        cd ${path.module}/front-end && sed -i "s|staging_api|${aws_api_gateway_deployment.staging.invoke_url}|g" .env-cmdrc
-    EOT
+    interpreter = ["bash", "-c"]
+    command     = <<-EOT
+            cd "${path.module}/front-end" && "sed -i "s|staging_api|${aws_api_gateway_deployment.staging.invoke_url}|g" .env-cmdrc"
+            EOT
   }
 }
 
@@ -39,9 +42,10 @@ resource "null_resource" "yarn_build" {
   ]
 
   provisioner "local-exec" {
-    command = <<-EOT
-      cd ${path.module}/front-end && yarn build:staging
-    EOT
+    interpreter = ["bash", "-c"]
+    command     = <<-EOT
+            cd "${path.module}/front-end" && "yarn build:staging"
+            EOT
   }
 }
 
@@ -52,9 +56,10 @@ resource "null_resource" "upload" {
   ]
 
   provisioner "local-exec" {
-    command = <<-EOT
-      cd ${path.module}/front-end && aws s3 cp build s3://serverless-spa-goaws --recursive
-    EOT
+    interpreter = ["bash", "-c"]
+    command     = <<-EOT
+            cd "${path.module}/front-end" && "aws s3 cp build s3://serverless-spa-goaws --recursive"
+            EOT
   }
 }
 

@@ -31,5 +31,5 @@ resource "aws_dynamodb_table" "informations1" {
 resource "aws_dynamodb_table_item" "items" {
   table_name = aws_dynamodb_table.informations1.name
   hash_key   = aws_dynamodb_table.informations1.hash_key
-  item       = file("source/informations.json")
+  item       = file("all-infos/source/informations.json")
 }

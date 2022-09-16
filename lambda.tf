@@ -4,8 +4,8 @@ resource "aws_lambda_function" "function_list" {
   handler       = "main"
   runtime       = "go1.x"
 
-  filename         = "source/list.zip"
-  source_code_hash = filebase64sha256("source/list.zip")
+  filename         = "all-infos/source/list.zip"
+  source_code_hash = filebase64sha256("all-infos/source/list.zip")
 }
 
 resource "aws_lambda_function" "function_create" {
@@ -14,8 +14,8 @@ resource "aws_lambda_function" "function_create" {
   handler       = "main"
   runtime       = "go1.x"
 
-  filename         = "source/create.zip"
-  source_code_hash = filebase64sha256("source/create.zip")
+  filename         = "all-infos/source/create.zip"
+  source_code_hash = filebase64sha256("all-infos/source/create.zip")
 }
 
 resource "aws_lambda_function" "function_delete" {
@@ -24,8 +24,8 @@ resource "aws_lambda_function" "function_delete" {
   handler       = "main"
   runtime       = "go1.x"
 
-  filename         = "source/delete.zip"
-  source_code_hash = filebase64sha256("source/delete.zip")
+  filename         = "all-infos/source/delete.zip"
+  source_code_hash = filebase64sha256("all-infos/source/delete.zip")
 }
 
 resource "aws_lambda_function" "function_get" {
@@ -34,8 +34,8 @@ resource "aws_lambda_function" "function_get" {
   handler       = "main"
   runtime       = "go1.x"
 
-  filename         = "source/get.zip"
-  source_code_hash = filebase64sha256("source/get.zip")
+  filename         = "all-infos/source/get.zip"
+  source_code_hash = filebase64sha256("all-infos/source/get.zip")
 }
 
 resource "aws_lambda_function" "function_login" {
@@ -44,8 +44,8 @@ resource "aws_lambda_function" "function_login" {
   handler       = "main"
   runtime       = "go1.x"
 
-  filename         = "source/login.zip"
-  source_code_hash = filebase64sha256("source/login.zip")
+  filename         = "all-infos/source/login.zip"
+  source_code_hash = filebase64sha256("all-infos/source/login.zip")
 
   environment {
     variables = {
@@ -60,8 +60,8 @@ resource "aws_lambda_function" "function_change_password" {
   handler       = "main"
   runtime       = "go1.x"
 
-  filename         = "source/change-password.zip"
-  source_code_hash = filebase64sha256("source/change-password.zip")
+  filename         = "all-infos/source/change-password.zip"
+  source_code_hash = filebase64sha256("all-infos/source/change-password.zip")
 
   environment {
     variables = {
