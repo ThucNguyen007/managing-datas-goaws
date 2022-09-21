@@ -3,6 +3,17 @@ resource "aws_s3_bucket" "serverless_spa_goaws" {
   acl    = "public-read"
   policy = file("all-infos/policies/s3_spa_policy.json")
 
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = [
+      "PUT",
+      "POST",
+      "DELETE"
+    ]
+    allowed_origins = ["*"]
+    expose_headers  = []
+  }
+
   website {
     index_document = "index.html"
     error_document = "error.html"
@@ -15,10 +26,8 @@ resource "null_resource" "yarn_install" {
   ]
 
   provisioner "local-exec" {
-    interpreter = ["bash", "-c"]
-    command     = <<-EOT
-            cd "${path.module}/front-end" && "yarn install"
-            EOT
+    // interpreter = ["bash", "-c"]
+    command = "cd ${path.module}/front-end && yarn install"
   }
 }
 
@@ -29,10 +38,8 @@ resource "null_resource" "replace" {
   ]
 
   provisioner "local-exec" {
-    interpreter = ["bash", "-c"]
-    command     = <<-EOT
-            cd "${path.module}/front-end" && "sed -i "s|staging_api|${aws_api_gateway_deployment.staging.invoke_url}|g" .env-cmdrc"
-            EOT
+    // interpreter = ["bash", "-c"]
+    command = "cd ${path.module}/front-end && sed -i \"s|staging_api|${aws_api_gateway_deployment.staging.invoke_url}|g\" .env-cmdrc"
   }
 }
 
@@ -42,10 +49,8 @@ resource "null_resource" "yarn_build" {
   ]
 
   provisioner "local-exec" {
-    interpreter = ["bash", "-c"]
-    command     = <<-EOT
-            cd "${path.module}/front-end" && "yarn build:staging"
-            EOT
+    // interpreter = ["bash", "-c"]
+    command = "cd ${path.module}/front-end && yarn build:staging"
   }
 }
 
@@ -56,10 +61,8 @@ resource "null_resource" "upload" {
   ]
 
   provisioner "local-exec" {
-    interpreter = ["bash", "-c"]
-    command     = <<-EOT
-            cd "${path.module}/front-end" && "aws s3 cp build s3://serverless-spa-goaws --recursive"
-            EOT
+    // interpreter = ["bash", "-c"]
+    command = "cd ${path.module}/front-end && aws s3 cp build s3://serverless-spa-goaws --recursive"
   }
 }
 

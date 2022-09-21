@@ -58,6 +58,7 @@ func get(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, err
 		StatusCode: 200,
 		Headers: map[string]string{
 			"Content-Type": "application/json",
+			"Access-Control-Allow-Origin": "*",
 		},
 		Body: string(res),
 	}, nil

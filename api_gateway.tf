@@ -201,5 +201,3 @@ resource "aws_api_gateway_deployment" "production" {
     lambda : "informations1_delete:production"
   }
 }
-
-

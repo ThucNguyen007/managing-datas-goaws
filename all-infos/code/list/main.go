@@ -60,6 +60,7 @@ func list(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, er
 		StatusCode: 200,
 		Headers: map[string]string{
 			"Content-Type": "application/json",
+			"Access-Control-Allow-Origin": "*",
 		},
 		Body: string(r),
 	}, nil

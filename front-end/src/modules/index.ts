@@ -1,7 +1,7 @@
 const pages = [
   "Authentication",
   "Home",
-  "Book",
+  "Data",
 ];
 
 export default pages;

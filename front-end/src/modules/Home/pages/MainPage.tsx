@@ -10,33 +10,33 @@ interface Props {}
 
 const MainPage = (props: Props) => {
   /* State */
-  const [books, setBooks] = useState<Data[]>([]);
+  const [datas, setDatas] = useState<Data[]>([]);
 
   useEffect(() => {
     bookApi.list().then((res) => {
-      setBooks(res);
+      setDatas(res);
     });
   }, []);
 
   return (
     <div className="container home">
-      <Row className="books" gutter={16}>
-        {books.map((book) => (
-          <Col key={book.id} lg={6}>
+      <Row className="datas" gutter={16}>
+        {datas.map((data) => (
+          <Col key={data.id} lg={6}>
             <Card
               hoverable
               style={{ width: "100%" }}
               cover={
                 <Avatar
                   shape="square"
-                  alt={book.name}
-                  src={book.image}
+                  alt={data.name}
+                  src={data.image}
                 />
               }
             >
               <Meta
-                title={book.name}
-                description={book.author}
+                title={data.name}
+                description={data.author}
               />
             </Card>
           </Col>
